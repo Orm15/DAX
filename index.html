@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de DAX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ejemplos de Funciones DAX</h1>
+
+        <h2>Funciones Básicas de DAX</h2>
+
+        <div class="code-block">
+            <p>Suma los valores de la columna especificada en la tabla, útil para cálculos de totalización.</p>
+            <pre><code>Total Ventas = SUM(Tabla[Ventas])</code></pre>
+            <button onclick="copyToClipboard('Total Ventas = SUM(Tabla[Ventas])')">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <p>Devuelve el promedio de los valores de una columna, útil para métricas de rendimiento o análisis comparativos.</p>
+            <pre><code>Promedio Ventas = AVERAGE(Tabla[Ventas])</code></pre>
+            <button onclick="copyToClipboard('Promedio Ventas = AVERAGE(Tabla[Ventas])')">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <p>Cuenta el número de valores únicos en una columna, ideal para análisis de clientes únicos, productos únicos, etc.</p>
+            <pre><code>Total Clientes Únicos = DISTINCTCOUNT(Tabla[ClienteID])</code></pre>
+            <button onclick="copyToClipboard('Total Clientes Únicos = DISTINCTCOUNT(Tabla[ClienteID])')">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <p>COUNT cuenta el número de valores numéricos.</p>
+            <pre><code>Total Registros = COUNT(Tabla[Id])
+Total No Vacíos = COUNTA(Tabla[Columna])
+            </code></pre>
+            <button onclick="copyToClipboard(`Total Registros = COUNT(Tabla[Id])
+        Total No Vacíos = COUNTA(Tabla[Columna])`)">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <p>Devuelve el valor mínimo o máximo en una columna, útil para rangos y análisis de valores extremos.</p>
+            <pre><code>Valor Mínimo = MIN(Tabla[Precio])
+Valor Máximo = MAX(Tabla[Precio])
+            </code></pre>
+            <button onclick="copyToClipboard(`Valor Mínimo = MIN(Tabla[Precio])
+Valor Máximo = MAX(Tabla[Precio])`)">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <p>Devuelve el valor mínimo o máximo en una columna, útil para rangos y análisis de valores extremos.</p>
+            <pre><code>Valor Mínimo = MIN(Tabla[Precio])
+Valor Máximo = MAX(Tabla[Precio])
+            </code></pre>
+            <button onclick="copyToClipboard(`Valor Mínimo = MIN(Tabla[Precio])
+Valor Máximo = MAX(Tabla[Precio])`)">Copiar</button>
+        </div>
+        
+        <h2>Funciones de Filtrado y Cálculo Condicional</h2>
+        <div class="code-block">
+            <h3>CALCULATE</h3>
+            <p>Evalúa una expresión en el contexto modificado por un filtro. Aquí, se filtran las ventas solo del año actual.</p>
+            <pre><code>Ventas Año Actual = CALCULATE(SUM(Tabla[Ventas]), YEAR(Tabla[Fecha]) = YEAR(TODAY()))
+            </code></pre>
+            <button onclick="copyToClipboard(`Ventas Año Actual = CALCULATE(SUM(Tabla[Ventas]), YEAR(Tabla[Fecha]) = YEAR(TODAY()))`)">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>FILTER</h3>
+            <p>Permite aplicar filtros personalizados a una tabla. Aquí, solo se suman las ventas que son mayores a 1000.</p>
+            <pre><code>Ventas Superiores = CALCULATE(SUM(Tabla[Ventas]), FILTER(Tabla, Tabla[Ventas] > 1000))
+            </code></pre>
+            <button onclick="copyToClipboard(`Ventas Superiores = CALCULATE(SUM(Tabla[Ventas]), FILTER(Tabla, Tabla[Ventas] > 1000))`)">Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>IF</h3>
+            <p>Realiza una evaluación condicional y devuelve valores según la condición, útil para clasificaciones básicas.</p>
+            <pre><code>Clasificación Ventas = IF(Tabla[Ventas] > 1000, "Alta", "Baja")
+            </code></pre>
+            <button onclick='copyToClipboard(`Clasificación Ventas = IF(Tabla[Ventas] > 1000, "Alta", "Baja")`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>SWITCH</h3>
+            <p>Permite aplicar múltiples condiciones sin usar varios IF, ideal para categorizar valores específicos.</p>
+            <pre><code>Clasificación Producto = SWITCH(
+                Tabla[Producto],
+                "Producto A", "Alta Demanda",
+                "Producto B", "Demanda Media",
+                "Producto C", "Baja Demanda",
+                "Desconocido"
+            )
+            </code></pre>
+            <button onclick='copyToClipboard(`Clasificación Producto = SWITCH(
+                Tabla[Producto],
+                "Producto A", "Alta Demanda",
+                "Producto B", "Demanda Media",
+                "Producto C", "Baja Demanda",
+                "Desconocido"
+            )`)'>Copiar</button>
+        </div>
+
+        <h2>Funciones de Manejo de Fechas</h2>
+
+        <div class="code-block">
+            <h3>YEAR, MONTH, DAY</h3>
+            <p>Extraen el año, mes y día de una columna de fecha, útiles para descomponer fechas para análisis.</p>
+            <pre><code>Año Venta = YEAR(Tabla[Fecha])
+                Mes Venta = MONTH(Tabla[Fecha])
+                Día Venta = DAY(Tabla[Fecha])
+            </code></pre>
+            <button onclick='copyToClipboard(`Año Venta = YEAR(Tabla[Fecha])
+            Mes Venta = MONTH(Tabla[Fecha])
+            Día Venta = DAY(Tabla[Fecha])`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>DATEDIFF</h3>
+            <p>Devuelve la diferencia entre dos fechas en días, meses o años, útil para calcular antigüedad o tiempo transcurrido.</p>
+            <pre><code>Días desde la Compra = DATEDIFF(Tabla[FechaCompra], TODAY(), DAY)
+            </code></pre>
+            <button onclick='copyToClipboard(`Días desde la Compra = DATEDIFF(Tabla[FechaCompra], TODAY(), DAY)`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>DATEADD</h3>
+            <p>Permite desplazar fechas en un intervalo específico, como para obtener valores del mes anterior.</p>
+            <pre><code>Ventas Mes Anterior = CALCULATE(SUM(Tabla[Ventas]), DATEADD(Tabla[Fecha], -1, MONTH))
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas Mes Anterior = CALCULATE(SUM(Tabla[Ventas]), DATEADD(Tabla[Fecha], -1, MONTH))`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>EOMONTH</h3>
+            <p>Devuelve el último día del mes especificado, útil para análisis de fin de periodo.</p>
+            <pre><code>Fin de Mes = EOMONTH(Tabla[Fecha], 0)
+            </code></pre>
+            <button onclick='copyToClipboard(`Fin de Mes = EOMONTH(Tabla[Fecha], 0)`)'>Copiar</button>
+        </div>
+
+        <h2>Cálculos Avanzados y Acumulativos</h2>
+
+        <div class="code-block">
+            <h3>TOTALYTD</h3>
+            <p>Calcula el total acumulado hasta la fecha del año en curso. Muy útil para reportes de progreso.</p>
+            <pre><code>Ventas Acumuladas Año = TOTALYTD(SUM(Tabla[Ventas]), Tabla[Fecha])
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas Acumuladas Año = TOTALYTD(SUM(Tabla[Ventas]), Tabla[Fecha])`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>ACumulative Total con EARLIER</h3>
+            <p>Acumula los valores hasta la fecha actual o una fecha especificada.</p>
+            <pre><code>Total Acumulado = 
+                CALCULATE(
+                    SUM(Tabla[Ventas]),
+                    FILTER(
+                        ALL(Tabla[Fecha]),
+                        Tabla[Fecha] <= EARLIER(Tabla[Fecha])
+                    )
+                )
+            </code></pre>
+            <button onclick='copyToClipboard(`Total Acumulado = 
+            CALCULATE(
+                SUM(Tabla[Ventas]),
+                FILTER(
+                    ALL(Tabla[Fecha]),
+                    Tabla[Fecha] <= EARLIER(Tabla[Fecha])
+                )
+            )`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>RANKX</h3>
+            <p>Permite clasificar los valores de una columna en orden. Aquí, clasifica los valores de ventas en orden descendente.</p>
+            <pre><code>Ranking de Ventas = RANKX(ALL(Tabla), Tabla[Ventas], , DESC, Dense)
+            </code></pre>
+            <button onclick='copyToClipboard(`Ranking de Ventas = RANKX(ALL(Tabla), Tabla[Ventas], , DESC, Dense)`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>ALLSELECTED</h3>
+            <p>Mantiene solo los filtros aplicados en la visualización. Ideal para crear métricas dinámicas en Power BI que respondan a los filtros aplicados.</p>
+            <pre><code>Total Filtrado = CALCULATE(SUM(Tabla[Ventas]), ALLSELECTED(Tabla))
+            </code></pre>
+            <button onclick='copyToClipboard(`Total Filtrado = CALCULATE(SUM(Tabla[Ventas]), ALLSELECTED(Tabla))`)'>Copiar</button>
+        </div>
+
+        <h2>Análisis de Periodos de Tiempo</h2>
+
+        <div class="code-block">
+            <h3>SAMEPERIODLASTYEAR</h3>
+            <p>Devuelve los valores del mismo periodo del año anterior, útil para comparaciones anuales directas.</p>
+            <pre><code>Ventas Año Pasado = CALCULATE(SUM(Tabla[Ventas]), SAMEPERIODLASTYEAR(Tabla[Fecha]))
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas Año Pasado = CALCULATE(SUM(Tabla[Ventas]), SAMEPERIODLASTYEAR(Tabla[Fecha]))`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>PREVIOUSMONTH</h3>
+            <p>Devuelve los valores del mes anterior, útil para reportes comparativos mensuales.</p>
+            <pre><code>Ventas Mes Anterior = CALCULATE(SUM(Tabla[Ventas]), PREVIOUSMONTH(Tabla[Fecha]))
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas Mes Anterior = CALCULATE(SUM(Tabla[Ventas]), PREVIOUSMONTH(Tabla[Fecha]))`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>DATESYTD</h3>
+            <p>Calcula las ventas desde el inicio del año hasta la fecha actual.</p>
+            <pre><code>Ventas YTD = CALCULATE(SUM(Tabla[Ventas]), DATESYTD(Tabla[Fecha]))
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas YTD = CALCULATE(SUM(Tabla[Ventas]), DATESYTD(Tabla[Fecha]))`)'>Copiar</button>
+        </div>
+
+        <h2>Utilidades</h2>
+
+        <div class="code-block">
+            <h3>Tabla Calendario Completa</h3>
+            <p>Este código crea una tabla calendario básica que incluye columnas como el año, trimestre, mes, día, entre otras.</p>
+            <pre><code>TablaCalendario = 
+                VAR FechaInicio = DATE(2020, 1, 1)   -- Cambia la fecha de inicio según tu necesidad
+                VAR FechaFin = DATE(2025, 12, 31)    -- Cambia la fecha de fin según tu necesidad
+                RETURN
+                ADDCOLUMNS(
+                    CALENDAR(FechaInicio, FechaFin),
+                    "Año", YEAR([Date]),
+                    "Mes", MONTH([Date]),
+                    "Día", DAY([Date]),
+                    "NombreMes", FORMAT([Date], "MMMM"),
+                    "NombreDía", FORMAT([Date], "dddd"),
+                    "Trimestre", QUARTER([Date]),
+                    "Año-Mes", FORMAT([Date], "YYYY-MM"),
+                    "Fin de Mes", EOMONTH([Date], 0),
+                    "Año Fiscal", IF(MONTH([Date]) >= 7, YEAR([Date]) + 1, YEAR([Date])),
+                    "Trimestre Fiscal", 
+                         IF(MONTH([Date]) >= 7, 
+                            QUARTER([Date]) - 2, 
+                            QUARTER([Date]) + 2),
+                    "Es Fin de Semana", IF(WEEKDAY([Date], 2) > 5, TRUE, FALSE)
+                )
+            </code></pre>
+            <button onclick='copyToClipboard(`TablaCalendario = 
+            VAR FechaInicio = DATE(2020, 1, 1)   -- Cambia la fecha de inicio según tu necesidad
+            VAR FechaFin = DATE(2025, 12, 31)    -- Cambia la fecha de fin según tu necesidad
+            RETURN
+            ADDCOLUMNS(
+                CALENDAR(FechaInicio, FechaFin),
+                "Año", YEAR([Date]),
+                "Mes", MONTH([Date]),
+                "Día", DAY([Date]),
+                "NombreMes", FORMAT([Date], "MMMM"),
+                "NombreDía", FORMAT([Date], "dddd"),
+                "Trimestre", QUARTER([Date]),
+                "Año-Mes", FORMAT([Date], "YYYY-MM"),
+                "Fin de Mes", EOMONTH([Date], 0),
+                "Año Fiscal", IF(MONTH([Date]) >= 7, YEAR([Date]) + 1, YEAR([Date])),
+                "Trimestre Fiscal", 
+                     IF(MONTH([Date]) >= 7, 
+                        QUARTER([Date]) - 2, 
+                        QUARTER([Date]) + 2),
+                "Es Fin de Semana", IF(WEEKDAY([Date], 2) > 5, TRUE, FALSE)
+            )`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>Días Laborables</h3>
+            <p>Agrega una columna para identificar si un día es laborable o no, excluyendo fines de semana y festivos.</p>
+            <pre><code>Día Laborable = 
+                IF(
+                    TablaCalendario[Es Fin de Semana] = FALSE 
+                    && NOT( TablaCalendario[Date] IN {DATE(2024, 1, 1), DATE(2024, 12, 25)} ), 
+                    TRUE, 
+                    FALSE
+                )
+            </code></pre>
+            <button onclick='copyToClipboard(`Día Laborable = 
+            IF(
+                TablaCalendario[Es Fin de Semana] = FALSE 
+                && NOT( TablaCalendario[Date] IN {DATE(2024, 1, 1), DATE(2024, 12, 25)} ), 
+                TRUE, 
+                FALSE
+            )`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>Comparación de Crecimiento Anual</h3>
+            <p>Calcula la variación porcentual entre el año actual y el año pasado.</p>
+            <pre><code>Crecimiento Anual = 
+                DIVIDE(
+                    [Total Ventas] - [Ventas Año Anterior],
+                    [Ventas Año Anterior],
+                    0
+                )
+            </code></pre>
+            <button onclick='copyToClipboard(`Crecimiento Anual = 
+            DIVIDE(
+                [Total Ventas] - [Ventas Año Anterior],
+                [Ventas Año Anterior],
+                0
+            )`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>Rango de Fechas Personalizado</h3>
+            <p>Permite definir un rango específico para cálculos de ventas, adaptado a cualquier periodo personalizado.</p>
+            <pre><code>Ventas Rango Personalizado = 
+                CALCULATE(
+                    [Total Ventas],
+                    DATESBETWEEN(TablaCalendario[Date], DATE(2024, 1, 1), DATE(2024, 12, 31))
+                )
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas Rango Personalizado = 
+            CALCULATE(
+                [Total Ventas],
+                DATESBETWEEN(TablaCalendario[Date], DATE(2024, 1, 1), DATE(2024, 12, 31))
+            )`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>Expresiones Variables (VAR) para Cálculos Complejos</h3>
+            <p>La declaración de variables en DAX (VAR) ayuda a simplificar expresiones y mejora el rendimiento, ya que evalúa un cálculo una sola vez.</p>
+            <pre><code>Ventas Promedio Mes = 
+                VAR VentasTotales = [Total Ventas]
+                VAR MesesActivos = COUNTROWS(FILTER(Calendario, Calendario[Date] <= TODAY()))
+                RETURN DIVIDE(VentasTotales, MesesActivos, 0)
+            </code></pre>
+            <button onclick='copyToClipboard(`Ventas Promedio Mes = 
+            VAR VentasTotales = [Total Ventas]
+            VAR MesesActivos = COUNTROWS(FILTER(Calendario, Calendario[Date] <= TODAY()))
+            RETURN DIVIDE(VentasTotales, MesesActivos, 0)`)'>Copiar</button>
+        </div>
+
+        <div class="code-block">
+            <h3>Análisis de Datos con Funciones Estadísticas</h3>
+            <p>1.- Función AVERAGEX, MEDIANX, PERCENTILEX.INC: Útiles para cálculos estadísticos avanzados, como promedios, medianas y percentiles dentro de un grupo de datos.</p>
+            <p>2.- Distribuciones y Agrupaciones: Usa GROUPBY y SUMMARIZE para crear tablas y resúmenes de datos agregados según agrupaciones personalizadas.</p>
+            <pre><code>Total Ventas por Región = SUMMARIZE(Ventas, Ventas[Región], "Ventas Totales", SUM(Ventas[Monto]))
+            </code></pre>
+            <button onclick='copyToClipboard(`Total Ventas por Región = SUMMARIZE(Ventas, Ventas[Región], "Ventas Totales", SUM(Ventas[Monto]))`)'>Copiar</button>
+        </div>
+
+
+
+        <!-- Agrega más bloques de código aquí según sea necesario -->
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
